@@ -1,0 +1,26 @@
+# Ignore VS Code extensions and config
+.vscode/
+.vscode/extensions/
+
+# Ignore Python bytecode
+__pycache__/
+*.pyc
+
+# Ignore models and data (optional if not needed in repo)
+*.joblib
+*.pkl
+*.csv
+*.xlsx
+
+# Ignore Streamlit and OS files
+.streamlit/
+*.DS_Store
+Thumbs.db
+
+# Ignore environments
+.venv/
+env/
+venv/
+
+# Ignore Jupyter notebook checkpoints
+.ipynb_checkpoints/
