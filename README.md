@@ -17,8 +17,13 @@ HealthcareAssistant/
 │   ├── app.py                 # Main Streamlit app script
 
 │   ├── models/                # Folder to store ML models (joblib, pickle files)
-│   │    ├── model1.joblib
-│   │    └── model2.joblib
+│   │    ├── covid_rf_model.pkl
+│   │    └── diabetes_logistic_model.pkl
+│   │    └──diabetes_scaler.pkl
+│   │    └──heart_disease_model.pkl
+│   │    └──label_encoder.pkl
+│   │    └──ogistic_regression_model.pkl
+│   │    └──scaler.pkl
 │   ├── data/                  # Dataset files like CSVs used by the app
 │   │    ├── drug_reviews.csv
 │   │    └── medications.csv
@@ -37,7 +42,7 @@ HealthcareAssistant/
 
 1. **Clone the repository**
     ```bash
-    git clone https://github.com/eraveniraju/HealthcareAssistant.git
+    git clone https://github.com/eraveniraju/SmartHealthcareAssistant.git
     cd HealthcareAssistant
     ```
 
