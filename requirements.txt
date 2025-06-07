@@ -6,4 +6,3 @@ joblib==1.4.2
 matplotlib==3.9.2
 xgboost==2.0.3
 seaborn==0.13.2
-transformers==4.41.1
