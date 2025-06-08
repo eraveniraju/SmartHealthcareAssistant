@@ -204,50 +204,29 @@ if selected_tab == "🦠 COVID-19":
             appetite, smell_loss
         ]], dtype=np.float64)
 
-        if submit:
-    # Prepare input features
-    features = np.array([[
-        age,
-        1 if gender == "Male" else 0,
-        temp,
-        dry_cough,
-        sore_throat,
-        weakness,
-        breathing,
-        drowsiness,
-        chest_pain,
-        diabetes,
-        heart_disease,
-        lung_disease,
-        stroke,
-        bp,
-        kidney,
-        appetite,
-        smell_loss
-    ]], dtype=np.float64)
 
-    feature_names = [
+       feature_names = [
         'age', 'gender', 'body temperature',
         'dry_cough', 'sore_throat', 'weakness',
         'breathing', 'drowsiness', 'chest_pain',
         'diabetes', 'heart_disease', 'lung_disease',
         'stroke', 'bp', 'kidney', 'appetite', 'smell_loss'
-    ]
+       ]
 
-    df_features = pd.DataFrame(features, columns=feature_names)
+       df_features = pd.DataFrame(features, columns=feature_names)
 
-    # Scale only needed columns
-    scaled_input = models['scaler'].transform(df_features[['age', 'body temperature']])
+       # Scale only needed columns
+        scaled_input = models['scaler'].transform(df_features[['age', 'body temperature']])
 
-    # Predict class and probability
-    prediction = models['covid_model'].predict(scaled_input)[0]
-    probability = models['covid_model'].predict_proba(scaled_input)[0][1]  # Probability of positive class
+       # Predict class and probability
+       prediction = models['covid_model'].predict(scaled_input)[0]
+       probability = models['covid_model'].predict_proba(scaled_input)[0][1]  # Probability of positive class
 
-    # Display output with probability
-    if prediction == 1:
-        st.error(f"⚠️ You may be at risk for COVID-19.\n\n🧪 Probability: **{probability:.2%}**\nPlease consult a doctor.")
-    else:
-        st.success(f"✅ You are unlikely to have COVID-19.\n\n🧪 Probability: **{probability:.2%}**")
+      # Display output with probability
+      if prediction == 1:
+           st.error(f"⚠️ You may be at risk for COVID-19.\n\n🧪 Probability: **{probability:.2%}**\nPlease consult a doctor.")
+      else:
+           st.success(f"✅ You are unlikely to have COVID-19.\n\n🧪 Probability: **{probability:.2%}**")
 
 # ---------------------------- GENERAL DISEASE TAB ----------------------------
 elif selected_tab == "🩺 General Disease":
