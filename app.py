@@ -207,7 +207,7 @@ if selected_tab == "🦠 COVID-19":
         ]], dtype=np.float64)
 
         feature_names = [
-            'age', 'gender', 'temp'
+            'age', 'gender', 'temp',
             'dry_cough', 'sore_throat', 'weakness',
             'breathing', 'drowsiness', 'chest_pain',
             'diabetes', 'heart_disease', 'lung_disease',
