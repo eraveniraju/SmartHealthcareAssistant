@@ -207,7 +207,7 @@ if selected_tab == "🦠 COVID-19":
         ]], dtype=np.float64)
 
         feature_names = [
-            'age', 'gender', 'body temperature',
+            'age', 'gender', 'temp'
             'dry_cough', 'sore_throat', 'weakness',
             'breathing', 'drowsiness', 'chest_pain',
             'diabetes', 'heart_disease', 'lung_disease',
@@ -217,7 +217,7 @@ if selected_tab == "🦠 COVID-19":
         df_features = pd.DataFrame(features, columns=feature_names)
 
         # Scale only needed columns
-        scaled_input = models['scaler'].transform(df_features[['age', 'body temperature']])
+        scaled_input = models['scaler'].transform(df_features[['age', 'temp']])
 
         # Predict class and probability
         prediction = models['covid_model'].predict(scaled_input)[0]
