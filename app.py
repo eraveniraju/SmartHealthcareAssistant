@@ -211,9 +211,7 @@ if selected_tab == "🦠 COVID-19":
         if prediction == 0:
             st.success("✔️ Low Risk of COVID-19")
         elif prediction == 1:
-            st.warning("⚠️ Moderate Risk - Consider a Test")
-        else:
-            st.error("🚨 High Risk - Seek Medical Attention")
+            st.error("🚨 Risk -Consider a Test-Seek Medical Attention")
 
 # ---------------------------- GENERAL DISEASE TAB ----------------------------
 elif selected_tab == "🩺 General Disease":
