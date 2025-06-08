@@ -1,4 +1,4 @@
- # Smart Healthcare Assistant - Unified & Polished Streamlit App
+# Smart Healthcare Assistant - Unified & Polished Streamlit App
 
 import streamlit as st
 import pandas as pd
@@ -64,6 +64,7 @@ DATA_DIR = os.path.join(BASE_DIR, "data")
 # Read the CSV file
 drug_reviews_df = pd.read_csv(os.path.join(DATA_DIR, "Drug_Data_CSV.csv"))
 
+
 # Helper function to show disease details (unchanged)
 def helper(disease):
     disease_lower = disease.lower()
@@ -104,8 +105,6 @@ def helper(disease):
     return desc, precautions, medicines, drugs, diets, workouts
 
 
-
-
 # --- Load Data & Models ---
 @st.cache_resource
 def load_models():
@@ -118,6 +117,7 @@ def load_models():
         "diabetes_model": joblib.load(f"{MODELS_DIR}/diabetes_logistic_model.pkl"),
         "diabetes_scaler": joblib.load(f"{MODELS_DIR}/diabetes_scaler.pkl")
     }
+
 
 @st.cache_data
 def load_data():
@@ -133,6 +133,7 @@ def load_data():
     dfs['medicine_data']['Drug_Review'] = dfs['medicine_data']['Drug_Review'].apply(html.unescape)
     return dfs
 
+
 models = load_models()
 data_dfs = load_data()
 
@@ -140,23 +141,24 @@ data_dfs = load_data()
 
 # --- Navigation ---
 st.sidebar.title("🧭 Navigation")
-selected_tab = st.sidebar.radio("Go to", ["🏠 Home", "🦠 COVID-19", "🩺 General Disease", "❤️ Heart Disease", "🧬 Diabetes"])
+selected_tab = st.sidebar.radio("Go to",
+                                ["🏠 Home", "🦠 COVID-19", "🩺 General Disease", "❤️ Heart Disease", "🧬 Diabetes"])
 
 # --- HOME TAB ---
 if selected_tab == "🏠 Home":
     st.header("Welcome to the Smart Healthcare Assistant")
     st.markdown("""
-    <div style="font-size:18px; line-height:1.6;">
-    This assistant helps in:
-    <ul>
-        <li>Predicting <b>COVID-19 risk</b></li>
-        <li>Analyzing <b>Heart Disease</b></li>
-        <li>Predicting <b>Diabetes</b></li>
-        <li>Diagnosing <b>General Diseases</b> based on symptoms</li>
-    </ul>
-    <p>🔍 Use the sidebar to navigate through various health check modules.</p>
-    </div>
-    """, unsafe_allow_html=True)
+     <div style="font-size:18px; line-height:1.6;">
+     This assistant helps in:
+     <ul>
+         <li>Predicting <b>COVID-19 risk</b></li>
+         <li>Analyzing <b>Heart Disease</b></li>
+         <li>Predicting <b>Diabetes</b></li>
+         <li>Diagnosing <b>General Diseases</b> based on symptoms</li>
+     </ul>
+     <p>🔍 Use the sidebar to navigate through various health check modules.</p>
+     </div>
+     """, unsafe_allow_html=True)
 
 # ---------------------------- COVID-19 TAB ----------------------------
 if selected_tab == "🦠 COVID-19":
@@ -204,13 +206,12 @@ if selected_tab == "🦠 COVID-19":
             appetite, smell_loss
         ]], dtype=np.float64)
 
-
         feature_names = [
-        'age', 'gender', 'body temperature',
-        'dry_cough', 'sore_throat', 'weakness',
-        'breathing', 'drowsiness', 'chest_pain',
-        'diabetes', 'heart_disease', 'lung_disease',
-        'stroke', 'bp', 'kidney', 'appetite', 'smell_loss'
+            'age', 'gender', 'body temperature',
+            'dry_cough', 'sore_throat', 'weakness',
+            'breathing', 'drowsiness', 'chest_pain',
+            'diabetes', 'heart_disease', 'lung_disease',
+            'stroke', 'bp', 'kidney', 'appetite', 'smell_loss'
         ]
 
         df_features = pd.DataFrame(features, columns=feature_names)
@@ -222,10 +223,11 @@ if selected_tab == "🦠 COVID-19":
         prediction = models['covid_model'].predict(scaled_input)[0]
         probability = models['covid_model'].predict_proba(scaled_input)[0][1]  # Probability of positive class
 
-       # Display output with probability
-       if prediction == 1:
-            st.error(f"⚠️ You may be at risk for COVID-19.\n\n🧪 Probability: **{probability:.2%}**\nPlease consult a doctor.")
-       else:
+        # Display output with probability
+        if prediction == 1:
+            st.error(
+                f"⚠️ You may be at risk for COVID-19.\n\n🧪 Probability: **{probability:.2%}**\nPlease consult a doctor.")
+        else:
             st.success(f"✅ You are unlikely to have COVID-19.\n\n🧪 Probability: **{probability:.2%}**")
 
 # ---------------------------- GENERAL DISEASE TAB ----------------------------
@@ -278,7 +280,9 @@ elif selected_tab == "🩺 General Disease":
             st.markdown("</ul>", unsafe_allow_html=True)
 
             for idx, item in enumerate(drugs, 1):
-                st.markdown(f"<div class='drug-review'><b>{idx}. Drug Name:</b> {item['drugName']}<br><b>Review:</b> {item['Drug_Review']}</div>", unsafe_allow_html=True)
+                st.markdown(
+                    f"<div class='drug-review'><b>{idx}. Drug Name:</b> {item['drugName']}<br><b>Review:</b> {item['Drug_Review']}</div>",
+                    unsafe_allow_html=True)
 
             st.markdown("### 🥗 Diet Recommendations")
             st.markdown("<ul class='diet-list'>", unsafe_allow_html=True)
@@ -342,7 +346,9 @@ elif selected_tab == "❤️ Heart Disease":
             st.markdown("</ul>", unsafe_allow_html=True)
 
             for idx, item in enumerate(drugs, 1):
-                st.markdown(f"<div class='drug-review'><b>{idx}. Drug Name:</b> {item['drugName']}<br><b>Review:</b> {item['Drug_Review']}</div>", unsafe_allow_html=True)
+                st.markdown(
+                    f"<div class='drug-review'><b>{idx}. Drug Name:</b> {item['drugName']}<br><b>Review:</b> {item['Drug_Review']}</div>",
+                    unsafe_allow_html=True)
 
             st.markdown("### 🥗 Diet Recommendations")
             st.markdown("<ul class='diet-list'>", unsafe_allow_html=True)
@@ -407,7 +413,7 @@ elif selected_tab == "🧬 Diabetes":
                 st.markdown(
                     f"<div class='drug-review'><b>{idx}. Drug Name:</b> {item['drugName']}<br><b>Review:</b> {item['Drug_Review']}</div>",
                     unsafe_allow_html=True)
-                
+
             st.markdown("### 🥗 Diet Recommendations")
             st.markdown("<ul class='diet-list'>", unsafe_allow_html=True)
             for d in diets:
@@ -422,5 +428,3 @@ elif selected_tab == "🧬 Diabetes":
 
         else:
             st.success(f"Unlikely to have Diabetes (probability: {prob:.2f})")
-
-
