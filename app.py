@@ -60,7 +60,7 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # Construct relative paths
 MODELS_DIR = os.path.join(BASE_DIR, "Models")
-DATA_DIR = os.path.join(BASE_DIR, "Data")
+DATA_DIR = os.path.join(BASE_DIR, "data")
 # Read the CSV file
 drug_reviews_df = pd.read_csv(os.path.join(DATA_DIR, "Drug_Data_CSV.csv"))
 
