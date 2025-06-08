@@ -409,14 +409,5 @@ elif selected_tab == "🧬 Diabetes":
 
         else:
             st.success(f"Unlikely to have Diabetes (probability: {prob:.2f})")
-import os
 
-if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 8501))
-    import streamlit.web.bootstrap
-    streamlit.web.bootstrap.run(
-        "app.py",  # or your main file
-        f"http://localhost:{port}",
-        [],
-    )
 
