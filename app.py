@@ -197,7 +197,7 @@ if selected_tab == "🦠 COVID-19":
         submit = st.form_submit_button("Predict COVID Risk")
 
     if submit:
-        features = np.array([[
+        features = np.array([[  # 17 values
             age, 1 if gender == "Male" else 0, temp,
             dry_cough, sore_throat, weakness,
             breathing, drowsiness, chest_pain,
@@ -206,29 +206,21 @@ if selected_tab == "🦠 COVID-19":
             appetite, smell_loss
         ]], dtype=np.float64)
 
-        feature_names = [
-            'age', 'gender', 'temp',
-            'dry_cough', 'sore_throat', 'weakness',
-            'breathing', 'drowsiness', 'chest_pain',
-            'diabetes', 'heart_disease', 'lung_disease',
-            'stroke', 'bp', 'kidney', 'appetite', 'smell_loss'
-        ]
+        # Assuming 'age' is at index 0 and 'temp' is at index 2
+        scaled_values = models['scaler'].transform(features[:, [0, 2]])
+        features[:, [0, 2]] = scaled_values
 
-        df_features = pd.DataFrame(features, columns=feature_names)
+        # Get prediction and probability
+        prediction = models['covid_model'].predict(features)[0]
+        probability = models['covid_model'].predict_proba(features)[0][1]
 
-        # Scale only needed columns
-        scaled_input = models['scaler'].transform(df_features[['age', 'temp']])
-
-        # Predict class and probability
-        prediction = models['covid_model'].predict(scaled_input)[0]
-        probability = models['covid_model'].predict_proba(scaled_input)[0][1]  # Probability of positive class
-
-        # Display output with probability
+        # Display result
         if prediction == 1:
             st.error(
                 f"⚠️ You may be at risk for COVID-19.\n\n🧪 Probability: **{probability:.2%}**\nPlease consult a doctor.")
         else:
             st.success(f"✅ You are unlikely to have COVID-19.\n\n🧪 Probability: **{probability:.2%}**")
+
 
 # ---------------------------- GENERAL DISEASE TAB ----------------------------
 elif selected_tab == "🩺 General Disease":
