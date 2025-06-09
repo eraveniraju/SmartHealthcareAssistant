@@ -205,7 +205,9 @@ if selected_tab == "🦠 COVID-19":
             stroke, bp, kidney,
             appetite, smell_loss
         ]], dtype=np.float64)
-
+        
+            
+        
         # Assuming 'age' is at index 0 and 'temp' is at index 2
         scaled_values = models['scaler'].transform(features[:, [0, 2]])
         features[:, [0, 2]] = scaled_values
@@ -217,9 +219,17 @@ if selected_tab == "🦠 COVID-19":
         # Display result
         if prediction == 1:
             st.error(
-                f"⚠️ You may be at risk for COVID-19.\n\n🧪 Probability: **{probability:.2%}**\nPlease consult a doctor.")
+                f"⚠️ You may be at risk for COVID-19.\n\n🧪 Probability: **{probability:.2%}**\nPlease consult a doctor."
+            )
+        
+        elif 0.2 < probability < 0.5:
+            if temp >= 99.8:
+                st.warning("🌡️ Your body temperature seems above the normal range.\nPlease consult a doctor.")
+            else:
+                st.warning("🤒 Your symptoms may be related to an illness other than COVID-19.\nPlease visit your nearest health center.")
+        
         else:
-            st.success(f"✅ You are unlikely to have COVID-19.\n\n🧪 Probability: **{probability:.2%}**")
+            st.success("✅ Good news! Your symptoms don’t strongly indicate COVID-19.")
 
 
 # ---------------------------- GENERAL DISEASE TAB ----------------------------
