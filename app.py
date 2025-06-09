@@ -224,7 +224,7 @@ if selected_tab == "🦠 COVID-19":
         
         elif 0.2 < probability < 0.5 or temp >= 99.8:
             if temp >= 99.8:
-                st.warning("🌡️ Your body temperature seems above the normal range.\nPlease consult a doctor.")
+                st.warning("🌡️ Your body temperature seems above the normal range.\n🤒 Your symptoms may be related to an illness other than COVID-19.\nPlease consult a doctor.")
             else:
                 st.warning("🤒 Your symptoms may be related to an illness other than COVID-19.\nPlease visit your nearest health center.")
         
