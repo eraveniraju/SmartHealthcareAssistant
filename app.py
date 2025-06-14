@@ -111,7 +111,7 @@ def load_models():
     return {
         "covid_model": joblib.load(f"{MODELS_DIR}/covid_rf_model.pkl"),
         "scaler": joblib.load(f"{MODELS_DIR}/scaler.pkl"),
-        "disease_model": joblib.load(f"{MODELS_DIR}/logistic_regression_model.pkl"),
+        "disease_model": joblib.load(f"{MODELS_DIR}/RandomForestClassifier.pkl"),
         "label_encoder": joblib.load(f"{MODELS_DIR}/label_encoder.pkl"),
         "heart_model": joblib.load(f"{MODELS_DIR}/heart_disease_model.pkl"),
         "diabetes_model": joblib.load(f"{MODELS_DIR}/diabetes_logistic_model.pkl"),
